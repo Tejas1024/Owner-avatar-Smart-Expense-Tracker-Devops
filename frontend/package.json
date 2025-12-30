@@ -20,9 +20,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set CHOKIDAR_USEPOLLING=true && react-scripts start",
-    "start-win": "set FAST_REFRESH=false && set CHOKIDAR_USEPOLLING=true && react-scripts start"
-  },
+  "start": "set CHOKIDAR_USEPOLLING=true && react-scripts start",
+  "start-win": "set FAST_REFRESH=false && set CHOKIDAR_USEPOLLING=true && react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test --env=jsdom",
+  "eject": "react-scripts eject"
+ },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -41,4 +44,5 @@
       "last 1 safari version"
     ]
   }
+  
 }
