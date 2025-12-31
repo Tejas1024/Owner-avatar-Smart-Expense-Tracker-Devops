@@ -14,7 +14,6 @@ import './styles/App.css';
 
 // Debug counter outside component
 let appRenderCount = 0;
-
 // Prevent re-renders with memoized components
 const LoadingSpinner = React.memo(() => (
   <div className="loading-screen">
