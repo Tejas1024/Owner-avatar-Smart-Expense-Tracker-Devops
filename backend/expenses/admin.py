@@ -11,7 +11,7 @@ class CategoryAdmin(admin.ModelAdmin):
     
     def get_queryset(self, request):
         return super().get_queryset(request).order_by('name')
-
+ 
 @admin.register(Expense)
 class ExpenseAdmin(admin.ModelAdmin):
     list_display = ['title', 'user', 'category', 'amount', 'payment_method', 'date', 'created_at']
