@@ -9,4 +9,4 @@ router.register(r'budgets', BudgetViewSet, basename='budgets')
 
 urlpatterns = [
     path('', include(router.urls)),
-]
+] 
