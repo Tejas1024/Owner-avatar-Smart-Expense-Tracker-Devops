@@ -342,6 +342,6 @@ git push origin main
 
 ---
 
-*Phase 5 completed on: [Current Date]*
+*Phase 5 completed
 *Documentation by: Tejas*
 *Project: Smart Expense Tracker with AI Insights*
