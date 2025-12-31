@@ -33,7 +33,7 @@ const removeDebugToolbar = () => {
     '.djdt-show',
     '.djDebugPanelMenu',
     '.djDebugPanel'
-  ];
+  ]; 
 
   debugSelectors.forEach(selector => {
     const elements = document.querySelectorAll(selector);
