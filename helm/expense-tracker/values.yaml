@@ -12,7 +12,7 @@ replicaCount:
 image:
   backend:
     repository: tejas0010/expense-tracker-backend
-    tag: "v1"
+    tag: "v2"
     pullPolicy: IfNotPresent
 
   frontend:
