@@ -9,7 +9,7 @@ root.render(
   
     <App />
   
-);
+);  
 
 // Force remove debug toolbar on load
 const removeDebugToolbar = () => {

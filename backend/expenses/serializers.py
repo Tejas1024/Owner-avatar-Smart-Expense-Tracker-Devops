@@ -6,7 +6,7 @@ class CategorySerializer(serializers.ModelSerializer):
     """Keep for backwards compatibility but not used with hardcoded categories"""
     expense_count = serializers.SerializerMethodField()
     total_amount = serializers.SerializerMethodField()
-    
+      
     class Meta:
         model = Category
         fields = ['id', 'name', 'icon', 'color', 'expense_count', 'total_amount']
