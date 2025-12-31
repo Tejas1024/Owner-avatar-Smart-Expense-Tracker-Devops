@@ -11,12 +11,9 @@ DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 # 🌐 PRODUCTION HOSTS
 ALLOWED_HOSTS = [
-    'localhost', 
-    '127.0.0.1', 
-    '0.0.0.0',
-    '.onrender.com',  # ✅ Added for Render
-    'expense-tracker-backend2-1bv3.onrender.com',  # ✅ Your specific domain
+    '*'
 ]
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -165,16 +162,19 @@ CORS_ALLOW_HEADERS = [
 ]
 
 # 🔒 PRODUCTION SECURITY SETTINGS
+# 🔒 PRODUCTION SECURITY SETTINGS
+# 🔒 PRODUCTION SECURITY SETTINGS
 if not DEBUG:
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_SECONDS = 86400
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+    SECURE_HSTS_SECONDS = 0
     SECURE_REFERRER_POLICY = 'origin'
-    
-    # SSL settings (Render provides HTTPS)
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SECURE_SSL_REDIRECT = True
+
+    # ❌ Disable HTTPS redirect inside Kubernetes
+    SECURE_SSL_REDIRECT = False
+
+
 
 # Disable caching in development to prevent issues
 if DEBUG:

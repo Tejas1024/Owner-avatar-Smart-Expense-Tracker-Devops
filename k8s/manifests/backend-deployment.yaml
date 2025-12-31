@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: expense-tracker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: tejas0010/expense-tracker-backend:v1
+        ports:
+          - containerPort: 8000
+        env:
+          - name: DEBUG
+            value: "False"
+          - name: DATABASE_URL
+            value: postgresql://expenseuser:expensepass123@postgres-service:5432/expense_tracker
+          - name: DJANGO_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: django-secret
+                key: secret-key
+          - name: ALLOWED_HOSTS
+            value: "*"
+ #       livenessProbe:
+  #        httpGet:
+   #         path: /health/
+    #        port: 8000
+     #     initialDelaySeconds: 60
+      #    periodSeconds: 20
+       #   timeoutSeconds: 5
+        #  failureThreshold: 5
+       # readinessProbe:
+        #  httpGet:
+         #   path: /health/
+          #  port: 8000
+         # initialDelaySeconds: 30
+        #  periodSeconds: 10
+        #  timeoutSeconds: 5
+        #  failureThreshold: 5
