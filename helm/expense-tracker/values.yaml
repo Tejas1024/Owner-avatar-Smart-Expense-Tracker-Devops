@@ -122,3 +122,39 @@ resources:
     requests:
       cpu: 500m
       memory: 512Mi
+
+# Autoscaling configuration (optional)
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+
+# Additional generic deployment settings
+replicaCount: 1
+imagePullSecrets: []
+podAnnotations: {}
+podLabels: {}
+podSecurityContext: {}
+securityContext: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+volumeMounts: []
+volumes: []
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
