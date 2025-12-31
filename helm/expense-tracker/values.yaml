@@ -1,0 +1,82 @@
+global:
+  environment: production
+
+namespace: expense-tracker
+
+replicaCount:
+  backend: 2
+  frontend: 2
+  postgres: 1
+
+image:
+  backend:
+    repository: tejas0010/expense-tracker-backend
+    tag: "v1"
+    pullPolicy: IfNotPresent
+
+  frontend:
+    repository: tejas0010/expense-tracker-frontend
+    tag: "v1"
+    pullPolicy: IfNotPresent
+
+  postgres:
+    repository: postgres
+    tag: "15-alpine"
+    pullPolicy: IfNotPresent
+
+service:
+  backend:
+    type: ClusterIP
+    port: 8000
+    targetPort: 8000
+
+  frontend:
+    type: ClusterIP
+    port: 80
+    targetPort: 80
+
+  postgres:
+    type: ClusterIP
+    port: 5432
+    targetPort: 5432
+
+database:
+  host: postgres-service
+  name: expense_tracker
+  user: expenseuser
+  port: 5432
+
+secrets:
+  postgresPassword: "expensepass123"
+  djangoSecretKey: "django-super-secret-key"
+
+django:
+  debug: false
+  allowedHosts: "*"
+
+storage:
+  postgres:
+    size: 10Gi
+    storageClass: standard
+    accessMode: ReadWriteOnce
+
+healthCheck:
+  backend:
+    livenessProbe:
+      path: /health/
+      initialDelaySeconds: 30
+      periodSeconds: 10
+    readinessProbe:
+      path: /health/
+      initialDelaySeconds: 10
+      periodSeconds: 5
+
+  frontend:
+    livenessProbe:
+      path: /
+      initialDelaySeconds: 10
+      periodSeconds: 10
+    readinessProbe:
+      path: /
+      initialDelaySeconds: 5
+      periodSeconds: 5

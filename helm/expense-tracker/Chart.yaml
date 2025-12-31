@@ -1,0 +1,16 @@
+apiVersion: v2
+name: expense-tracker
+description: Smart Expense Tracker (Django + React + PostgreSQL)
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+
+keywords:
+  - django
+  - react
+  - postgresql
+  - kubernetes
+
+maintainers:
+  - name: Tejas
+    email: tejas@example.com

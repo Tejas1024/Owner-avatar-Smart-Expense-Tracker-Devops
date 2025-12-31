@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicaCount.backend }}
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: "{{ .Values.image.backend.repository }}:{{ .Values.image.backend.tag }}"
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URL
+          value: postgresql://{{ .Values.database.user }}:{{ .Values.secrets.postgresPassword }}@{{ .Values.database.host }}:{{ .Values.database.port }}/{{ .Values.database.name }}
+        - name: DJANGO_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: django-secret
+              key: secret-key
+        - name: ALLOWED_HOSTS
+          value: {{ .Values.django.allowedHosts | quote }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.healthCheck.backend.livenessProbe.path }}
+            port: 8000
+          initialDelaySeconds: {{ .Values.healthCheck.backend.livenessProbe.initialDelaySeconds }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.healthCheck.backend.readinessProbe.path }}
+            port: 8000
+          initialDelaySeconds: {{ .Values.healthCheck.backend.readinessProbe.initialDelaySeconds }}
