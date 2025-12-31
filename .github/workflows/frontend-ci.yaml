@@ -10,6 +10,7 @@ on:
     paths:
       - 'frontend/**'
 
+
 jobs:
   test-and-build:
     runs-on: ubuntu-latest
